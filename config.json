@@ -4,6 +4,6 @@
   "website": "omecawholesale.com",
   "address": "13920 Bridgeport Rd, Richmond, BC V6V 1V3",
   "email": "omecawholesale@gmail.com",
-  "target_tag": [],
-  "target_language": ""
+  "target_tag": ["restaurant", "takeout"],
+  "target_language": ["default", "zh-CN"]
 }

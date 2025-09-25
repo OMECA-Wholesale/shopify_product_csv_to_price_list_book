@@ -14,6 +14,7 @@ A tool to convert Shopify product export data into a professional Excel price bo
 ## Project Structure
 
 ```
+├── assets/                         # Company assets (logos, etc.)
 ├── inputs/
 │   ├── shopify_product_csv/       # Shopify product export CSV files
 │   └── shopify_translate_csv/     # Shopify translation export CSV files
@@ -21,6 +22,7 @@ A tool to convert Shopify product export data into a professional Excel price bo
 │   ├── product_extractor.py       # Product data extraction module
 │   └── translation_extractor.py   # Translation data extraction module
 ├── outputs/                       # Generated Excel price books
+├── temp/                          # Temporary files (auto-created)
 ├── config.json                     # Configuration file
 ├── generate_pricebook.py          # Main generation script
 └── requirements.txt               # Python dependencies
@@ -51,7 +53,8 @@ Edit `config.json` to customize your price book:
   "address": "Your Company Address",
   "email": "your@email.com",
   "target_tag": [],              // Tags to filter products (empty = all products)
-  "target_language": ["default"] // Language codes for multi-language support
+  "target_language": ["default"], // Language codes for multi-language support
+  "logo": "assets/logo.png"      // Optional: Path to company logo
 }
 ```
 
@@ -65,7 +68,12 @@ Edit `config.json` to customize your price book:
 - `target_language`: Language codes for multi-language product names
   - `["default"]` - Use only default language from product CSV
   - `["default", "zh-CN"]` - Include both English and Chinese names
-  - Example output: "Red T-shirt 红短袖"
+  - Names appear on separate lines within the same cell
+
+- `logo`: (Optional) Path to company logo
+  - Place your logo file in the `assets/` folder
+  - Supports common image formats (PNG, JPG, etc.)
+  - Logo will appear in the Excel header next to company name
 
 ## Usage
 

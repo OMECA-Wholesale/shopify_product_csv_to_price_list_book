@@ -27,6 +27,11 @@ class ProductExtractor:
             if pd.isna(handle):
                 continue
 
+            # Skip inactive products
+            status = row.get('Status', 'active')
+            if pd.notna(status) and str(status).lower() != 'active':
+                continue
+
             if handle not in products:
                 products[handle] = {
                     'handle': handle,
@@ -37,6 +42,7 @@ class ProductExtractor:
                     'type': row.get('Type', ''),
                     'tags': row.get('Tags', ''),
                     'published': row.get('Published', True),
+                    'status': row.get('Status', 'active'),
                     'variants': [],
                     'images': []
                 }
@@ -48,7 +54,8 @@ class ProductExtractor:
                         'alt_text': row.get('Image Alt Text', '')
                     })
 
-            if pd.notna(row.get('Option1 Value')) or pd.notna(row.get('Variant SKU')):
+            # Only add variants if product is active (handle exists in products dict)
+            if handle in products and (pd.notna(row.get('Option1 Value')) or pd.notna(row.get('Variant SKU'))):
                 variant = {
                     'sku': row.get('Variant SKU', ''),
                     'price': row.get('Variant Price', 0),
@@ -68,7 +75,8 @@ class ProductExtractor:
                 }
                 products[handle]['variants'].append(variant)
 
-            if pd.notna(row.get('Image Src')) and row.get('Image Position', 1) > 1:
+            # Only add additional images if product is active (handle exists in products dict)
+            if handle in products and pd.notna(row.get('Image Src')) and row.get('Image Position', 1) > 1:
                 products[handle]['images'].append({
                     'src': row.get('Image Src'),
                     'position': row.get('Image Position', 1),

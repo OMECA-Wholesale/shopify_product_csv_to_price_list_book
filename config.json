@@ -4,6 +4,22 @@
   "website": "omecawholesale.com",
   "address": "13920 Bridgeport Rd, Richmond, BC V6V 1V3",
   "email": "omecawholesale@gmail.com",
-  "target_tag": ["restaurant", "takeout"],
-  "target_language": ["default", "zh-CN"]
+  "target_tag": [
+    "ceramic-陶瓷",
+    "stainless steel-不锈钢",
+    "bamboo-竹",
+    "plastic-塑料",
+    "alloy-合金",
+    "glass-玻璃",
+    "disposable-消耗品",
+    "takeout bowl-外卖碗",
+    "takeout box-外卖盒",
+    "takeout cups-外卖杯",
+    "takeout bag-外卖袋子",
+    "takeout utensil-外卖餐具",
+    "operation-运营用品",
+    "cleanware-清洁用品"
+  ],
+  "target_language": ["default", "zh-CN"],
+  "logo": "assets/omeca_logo_transparent.jpg"
 }

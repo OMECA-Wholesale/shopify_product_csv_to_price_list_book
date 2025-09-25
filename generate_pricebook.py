@@ -437,6 +437,7 @@ class PriceBookGenerator:
         self.ws.page_setup.orientation = 'landscape'
         self.ws.page_setup.fitToWidth = 1
         self.ws.page_setup.fitToHeight = False
+        self.ws.page_setup.paperSize = self.ws.PAPERSIZE_LETTER
 
     def generate(self):
         print("Initializing extractors...")
@@ -465,9 +466,16 @@ class PriceBookGenerator:
 
         print(f"Found {len(grouped_products)} product groups")
 
-        for tag, products in grouped_products.items():
+        for idx, (tag, products) in enumerate(grouped_products.items()):
             print(f"Adding section: {tag} with {len(products)} products")
             current_row = self.add_product_section(products, tag, current_row)
+
+            # Add page break after each section (except the last one)
+            if idx < len(grouped_products) - 1:
+                # Add a horizontal page break after this section
+                # The break occurs before the specified row, so we use current_row - 1
+                from openpyxl.worksheet.pagebreak import Break
+                self.ws.row_breaks.append(Break(id=current_row - 1))
 
         print("Setting column widths...")
         self.set_column_widths()

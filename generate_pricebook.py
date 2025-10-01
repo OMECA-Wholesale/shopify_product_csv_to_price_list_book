@@ -188,10 +188,14 @@ class PriceBookGenerator:
 
         current_row += 1
 
+        # Sort products by SKU (using first variant's SKU)
+        # Convert to string to handle mixed types (str, float, NaN)
+        sorted_products = sorted(products, key=lambda p: str(p.get('variants', [{}])[0].get('sku', '') or ''))
+
         # Track row colors for alternating effect
         row_count = 0
 
-        for product_idx, product in enumerate(products):
+        for product_idx, product in enumerate(sorted_products):
             # Store the starting row for this product
             product_start_row = current_row
 
